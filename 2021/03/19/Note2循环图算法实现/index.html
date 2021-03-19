@@ -1,0 +1,389 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<link rel="bookmark"  type="image/x-icon"  href="/img/rose.png"/>
+	<link rel="shortcut icon" href="/img/rose.png">
+	
+			    <title>
+    Tower's Blog
+    </title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="/css/mic_main.css" />
+    <link rel="stylesheet" href="/css/dropdownMenu.css" />
+    <meta name="keywords" content="tower" />
+    
+    	<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+	 
+    <noscript>
+        <link rel="stylesheet" href="/css/noscript.css" />
+    </noscript>
+    <style type="text/css">
+        body:before {
+          content: ' ';
+          position: fixed;
+          top: 0;
+          background: url('/img/bg.jpg') center 0 no-repeat;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          background-size: cover; 
+        }
+    </style>
+
+			    
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script async type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/jquery.scrollex.min.js"></script>
+    <script src="/js/jquery.scrolly.min.js"></script>
+    <script src="/js/skel.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/main.js"></script>
+	
+<meta name="generator" content="Hexo 5.4.0"></head>
+    
+		
+<!-- Layouts -->
+
+
+
+<!--  代码渲染  -->
+<link rel="stylesheet" href="/css/prism_coy.css" />
+<link rel="stylesheet" href="/css/typo.css" />
+<!-- 文章页 -->
+<body class="is-loading">
+    <!-- Wrapper 外包 s-->
+    <div id="wrapper" class="fade-in">
+        <!-- Intro 头部显示 s -->
+        <!-- Intro 头部显示 e -->
+        <!-- Header 头部logo start -->
+        <header id="header">
+    <a href="/" class="logo">TOWER</a>
+</header>
+        <!-- Nav 导航条 start -->
+        <nav id="nav" class="special" >
+            <ul class="menu links" >
+			<!-- Homepage  主页  --> 
+			<li >
+	            <a href="/" rel="nofollow">HomePage</a>
+	        </li>
+			<!-- categories_name  分类   --> 
+	        
+	        <!-- archives  归档   --> 
+	        
+	        
+		        <!-- Pages 自定义   -->
+		        
+
+
+            </ul>
+            <!-- icons 图标   -->
+			<ul class="icons">
+                    
+                    <li>
+                        <a title="github" href="https://github.com/towermalta" target="_blank" rel="noopener">
+                            <i class="icon fa fa-github"></i>
+                        </a>
+                    </li>
+                    
+			</ul>
+</nav>
+
+        <div id="main" >
+            <div class ="post_page_title_img" style="height: 25rem;background-image: url(/images/fruit.jpg);background-position: center; background-repeat:no-repeat; background-size:cover;-moz-background-size:cover;overflow:hidden;" >
+                <a href="#" style="padding: 4rem 4rem 2rem 4rem ;"><h2 >Note2 循环图算法实现</h2></a>
+            </div>
+            <!-- Post -->
+            <div class="typo" style="padding: 3rem;">
+                <h1 id="图算法逻辑"><a href="#图算法逻辑" class="headerlink" title="图算法逻辑"></a>图算法逻辑</h1><h3 id="Part-1：数据处理"><a href="#Part-1：数据处理" class="headerlink" title="Part 1：数据处理"></a>Part 1：数据处理</h3><p>1.读取input.csv （用户输入）</p>
+<!--这个文件是一个包含了所有数据的文件，将其中的UserID列和MAC地址列提取出来-->
+
+<table>
+<thead>
+<tr>
+<th>519624639</th>
+<th>0.506674405</th>
+<th>1723</th>
+<th>873</th>
+<th>-3408764</th>
+<th>[‘FC:AB:90:AC:07:A0’]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>781470137</td>
+<td>0.522627737</td>
+<td>685</td>
+<td>358</td>
+<td>977720</td>
+<td>[‘00:DB:4D:D7:4D:46’, ‘B8:37:65:37:42:DB’, ‘00:DB:44:19:3E:9E’, ‘00:DB:6F:B8:DE:F7’, ‘00:DB:08:A8:5D:3F’, ‘00:DB:5F:2C:34:BD’, ‘00:DB:F2:4F:21:14’, ‘00:DB:1D:14:1D:5A’, ‘2C:5B:B8:B6:71:BC’]</td>
+</tr>
+</tbody></table>
+<p>2.输出input_clean.csv</p>
+<!--将上面提取的UserID列和MAC地址列输出到一个没有行索引也没有列索引的文件中-->
+
+<table>
+<thead>
+<tr>
+<th>519624639</th>
+<th>[‘FC:AB:90:AC:07:A0’]</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>781470137</td>
+<td>[‘00:DB:4D:D7:4D:46’, ‘B8:37:65:37:42:DB’, ‘00:DB:44:19:3E:9E’, ‘00:DB:6F:B8:DE:F7’, ‘00:DB:08:A8:5D:3F’, ‘00:DB:5F:2C:34:BD’, ‘00:DB:F2:4F:21:14’, ‘00:DB:1D:14:1D:5A’, ‘2C:5B:B8:B6:71:BC’]</td>
+</tr>
+</tbody></table>
+<p>3.定义两个新的DataFrame，分别命名为IDdegree_frame（用来存放用户ID和它的度）和IDmac_frame（用来存放用户ID和它的mac的一一对应关系）</p>
+<p>4.向上面两个dataframe中填充数据：对于input_clean.csv中的数据进行一个循环读取和计算，我们可以得到两个新的csv文件，分别是user_degree.csv, user_mac.csv, 然后在向user_mac.csv的第三列添加一个全员均为1的weight值：</p>
+<p>① user_degree.csv  <strong>(IDdegree_frame: {‘UID’:{},’degree’:{}})</strong>   (IDdegree_df)</p>
+<table>
+<thead>
+<tr>
+<th>519624639</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>781470137</td>
+<td>9</td>
+</tr>
+<tr>
+<td>532186099</td>
+<td>8</td>
+</tr>
+</tbody></table>
+<p>② user_mac.csv  <strong>(IDmac_frame: {‘UID’:{},’MAC’:{}})</strong>   (中间的IDmac_df)</p>
+<table>
+<thead>
+<tr>
+<th>519624639</th>
+<th>‘FC:AB:90:AC:07:A0’</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>781470137</td>
+<td>‘00:DB:4D:D7:4D:46’</td>
+</tr>
+<tr>
+<td>781470137</td>
+<td>‘B8:37:65:37:42:DB’</td>
+</tr>
+</tbody></table>
+<p>③ user_mac_weight.csv  <strong>(IDmac_frame: {‘UID’:{},’MAC’:{}, ‘weight’:{}})</strong>   (IDmac_df)</p>
+<table>
+<thead>
+<tr>
+<th>519624639</th>
+<th>‘FC:AB:90:AC:07:A0’</th>
+<th>1</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>781470137</td>
+<td>‘00:DB:4D:D7:4D:46’</td>
+<td>1</td>
+</tr>
+<tr>
+<td>781470137</td>
+<td>‘B8:37:65:37:42:DB’</td>
+<td>1</td>
+</tr>
+</tbody></table>
+<p>5.添加一个新的dataframe来作为我们的最后输出，名为out_frame。(outdf)</p>
+<p><strong>out_frame={‘warnUser’:{},’warnUdegree’:{}, ‘network_size’:{}, ‘id_num’:{}, ‘mac_num’:{}}</strong></p>
+<!--我们需要在一个大的循环中分块的向outdf中输入数据-->
+
+<!--为了实现分块写入的目标，我们定义两个全局变量，分别是flag和flag_before。 其中，flag_before指定了写入块开始的地方，flag指定了这个写入块结束的地方。-->
+
+
+
+<h3 id="Part-2-循环计算最大子图"><a href="#Part-2-循环计算最大子图" class="headerlink" title="Part 2: 循环计算最大子图"></a>Part 2: 循环计算最大子图</h3><p>while data_size&gt;0:(删完所有IDmac_df中的点之后，data_size的值为0)</p>
+<p>1.将IDmac_df中的点添加到图中</p>
+<p>①首先将IDmac_df转化为三列的array，然后添加到datalist中。</p>
+<p>②将datalist中的每个点添加到名为gg的图中</p>
+<p>2.计算当前图中的最大子图，得到包含当前最大子图的outdf</p>
+<p>①利用networkX返回这个图中的最大子图，返回的结果是一个包含有mac地址和id值的集合</p>
+<p>②将返回的set转换为一个list，命名为largest_list（每个循环都会更新）</p>
+<p>③循环读取largest_list中的元素，判断是否为数字，如果是，就将它添加到<strong>point_list</strong>（每个循环都会更新）中</p>
+<p>④然后根据读取的ID值，从IDdgree_df中找到它对应的度，将ID值和degree值输出到outdf中，network_size\id_num\mac_num的值暂时设为0</p>
+<p>⑤统一输入所有这些点的network_size\id_num\mac_num值，对于处于同一个子图中的点而言，它们的这三项值应该是一样的</p>
+<p>3.从IDmac_df中删除point_list中所包含的点</p>
+<p>①判断point_list中点的个数，从IDmac_df删除UID列中包含有point_list[m]的点的行</p>
+<p>​    if len(point_list)==1:</p>
+<p>​          IDmac_df=IDmac_df[~IDmac_df[‘UID’].isin([point_list[0]])]</p>
+<p>​    else:</p>
+<p>​          for m in range(len(point_list)):</p>
+<p>​            IDmac_df=IDmac_df[~IDmac_df[‘UID’].isin([point_list[m]])]</p>
+<p>②重新计算data_size, data_size = IDmac_df.shape[0]。 </p>
+<p>③data_size&gt;0时，重新进入大循环，直到将IDmac_df中的数据点都删完。</p>
+<h3 id="part-3：输出结果"><a href="#part-3：输出结果" class="headerlink" title="part 3：输出结果"></a>part 3：输出结果</h3><p>将outdf（函数返回值）的内容输出到output.csv。保存header值，去除列索引</p>
+<table>
+<thead>
+<tr>
+<th>warnUser</th>
+<th>warnUdegree</th>
+<th>network_size</th>
+<th>id_num</th>
+<th>mac_num</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>719232091</td>
+<td>3</td>
+<td>213</td>
+<td>15</td>
+<td>198</td>
+</tr>
+<tr>
+<td>774112863</td>
+<td>4</td>
+<td>213</td>
+<td>15</td>
+<td>198</td>
+</tr>
+<tr>
+<td>533831777</td>
+<td>34</td>
+<td>213</td>
+<td>15</td>
+<td>198</td>
+</tr>
+<tr>
+<td>493470346</td>
+<td>14</td>
+<td>213</td>
+<td>15</td>
+<td>198</td>
+</tr>
+</tbody></table>
+<h1 id="具体代码"><a href="#具体代码" class="headerlink" title="具体代码"></a>具体代码</h1><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">import</span> networkx <span class="keyword">as</span> nx</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">graph_analysis</span>(<span class="params">path</span>):</span></span><br><span class="line">    data_original = pd.read_csv(path,header=<span class="literal">None</span>, encoding=<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line">    data_original.drop(data_original.columns[<span class="number">1</span>: <span class="number">5</span>], axis=<span class="number">1</span>,inplace=<span class="literal">True</span>)</span><br><span class="line"></span><br><span class="line">    data_original.to_csv(<span class="string">&quot;input_clean.csv&quot;</span>, index=<span class="literal">False</span>, header=<span class="literal">False</span>) </span><br><span class="line">    <span class="comment">#去除中间无用列之后的csv</span></span><br><span class="line"></span><br><span class="line">    IDdegree_frame=&#123;<span class="string">&#x27;UID&#x27;</span>:&#123;&#125;,<span class="string">&#x27;degree&#x27;</span>:&#123;&#125;&#125;</span><br><span class="line">    IDdegree_df=pd.DataFrame(IDdegree_frame)</span><br><span class="line"></span><br><span class="line">    IDmac_frame=&#123;<span class="string">&#x27;UID&#x27;</span>:&#123;&#125;,<span class="string">&#x27;MAC&#x27;</span>:&#123;&#125;&#125;</span><br><span class="line">    IDmac_df=pd.DataFrame(IDmac_frame)</span><br><span class="line"></span><br><span class="line">    k = <span class="number">0</span> <span class="comment">#用来拆分maclist的变量</span></span><br><span class="line">    a = <span class="number">0.0</span> <span class="comment">#用来从largest_components中筛选出其中的用户ID</span></span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(data_original.shape[<span class="number">0</span>]):</span><br><span class="line">        MACstr = data_original.iloc[i,<span class="number">1</span>]</span><br><span class="line">        <span class="built_in">str</span> = MACstr[<span class="number">1</span>:<span class="built_in">len</span>(MACstr)-<span class="number">1</span>]</span><br><span class="line">        maclist = <span class="built_in">str</span>.split(<span class="string">&#x27;, &#x27;</span>)</span><br><span class="line">        degree_value = <span class="built_in">len</span>(maclist)</span><br><span class="line">        <span class="comment">#计算weight value</span></span><br><span class="line">        IDdegree_df.loc[i]=[data_original.iloc[i,<span class="number">0</span>], degree_value] </span><br><span class="line">        <span class="comment">#让userid和weight一对一</span></span><br><span class="line">        <span class="keyword">for</span> mac <span class="keyword">in</span> maclist:</span><br><span class="line">            IDmac_df.loc[k]=[data_original.iloc[i,<span class="number">0</span>], mac]</span><br><span class="line">            print(k)</span><br><span class="line">            k = k+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">#生成user和degree的一一对应csv文件  </span></span><br><span class="line">    IDdegree_df.to_csv(<span class="string">&quot;user_degree.csv&quot;</span>, index=<span class="literal">False</span>, header=<span class="literal">False</span>)</span><br><span class="line">    <span class="comment">#生成user和mac的一一对应的csv文件：</span></span><br><span class="line">    IDmac_df.to_csv(<span class="string">&quot;user_mac.csv&quot;</span>, index=<span class="literal">False</span>, header=<span class="literal">False</span>)</span><br><span class="line">    <span class="comment">#生成id_mac_weight一一对应的csv文件</span></span><br><span class="line">    IDmac_df[<span class="string">&#x27;weight&#x27;</span>] = <span class="number">1</span></span><br><span class="line">    <span class="comment">#######修改了一下文件名 </span></span><br><span class="line">    IDmac_df.to_csv(<span class="string">&quot;user_mac_weight.csv&quot;</span>, index=<span class="literal">False</span>, header=<span class="literal">False</span>)  </span><br><span class="line"></span><br><span class="line">    <span class="comment">#计算初始的数据点的个数</span></span><br><span class="line">    data_size = IDmac_df.shape[<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">    <span class="comment">#启用一个新的df来作为输出，这个df应该有五列，分别是：</span></span><br><span class="line">    <span class="comment">#UID, degree， network_size, uid_num, mac_num</span></span><br><span class="line">    out_frame=&#123;<span class="string">&#x27;warnUser&#x27;</span>:&#123;&#125;,<span class="string">&#x27;warnUdegree&#x27;</span>:&#123;&#125;, <span class="string">&#x27;network_size&#x27;</span>:&#123;&#125;, <span class="string">&#x27;id_num&#x27;</span>:&#123;&#125;, <span class="string">&#x27;mac_num&#x27;</span>:&#123;&#125;&#125;</span><br><span class="line">    outdf=pd.DataFrame(out_frame)</span><br><span class="line"></span><br><span class="line">    <span class="comment">#定义一个标志，用来记录每个子图的开始填入位置</span></span><br><span class="line">    flag = <span class="number">0</span></span><br><span class="line">    flag_before = <span class="number">0</span></span><br><span class="line">    </span><br><span class="line">    print(<span class="string">&quot;IDmac_df_shape[0]_before:&quot;</span>)</span><br><span class="line">    print(IDmac_df.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">while</span> data_size&gt;<span class="number">0</span>:</span><br><span class="line">        <span class="comment">#将id_mac_weight转化为三列的list</span></span><br><span class="line">        data_array = IDmac_df.values.reshape(-<span class="number">1</span>,<span class="number">3</span>)</span><br><span class="line">        datalist = data_array.tolist()</span><br><span class="line">        <span class="comment">#将list中的每个点添加到图中：</span></span><br><span class="line">        gg = nx.Graph()</span><br><span class="line">        <span class="keyword">for</span> edges <span class="keyword">in</span> datalist: <span class="comment">#datalist[0:1000]</span></span><br><span class="line">            gg.add_edge(edges[<span class="number">1</span>],edges[<span class="number">0</span>], weight = edges[<span class="number">2</span>]) </span><br><span class="line"></span><br><span class="line">        <span class="comment">#从生成的图中寻找最大子图，名为largest_components</span></span><br><span class="line">        <span class="comment">#它是个包含了不重复的mac和id的一个集合</span></span><br><span class="line">        <span class="comment">#返回值是一个集合</span></span><br><span class="line">        largest_components=<span class="built_in">max</span>(nx.connected_components(gg),key=<span class="built_in">len</span>)  </span><br><span class="line">        largest_list = <span class="built_in">list</span>(largest_components) <span class="comment">##把这个set转为一个list</span></span><br><span class="line">        point_num = <span class="number">0</span> <span class="comment">#用来计算用户ID的数量</span></span><br><span class="line">        <span class="comment">#这个大循环时为了从最大子图中筛选其中包含的ID</span></span><br><span class="line">        <span class="comment">#然后根据ID去ID，degree文件中查找对应的degree值</span></span><br><span class="line">        <span class="comment">#最后将ID值和Degree值都输出到我们的outdf中</span></span><br><span class="line">        flag_before = flag</span><br><span class="line">        <span class="comment">#这个list用来存放从最大子图中所筛选出的id</span></span><br><span class="line">        point_list = [] </span><br><span class="line">        <span class="keyword">for</span> component <span class="keyword">in</span> largest_list:</span><br><span class="line">            <span class="keyword">if</span> <span class="built_in">type</span>(component)==<span class="built_in">type</span>(a):</span><br><span class="line">                point_list.append(component)</span><br><span class="line">                <span class="comment">##从最大子图的list中筛选出其中的ID值</span></span><br><span class="line">                point_num = point_num+<span class="number">1</span> </span><br><span class="line">                <span class="comment">#从id_degree的对应列表中找对应的id</span></span><br><span class="line">                <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(IDdegree_df.shape[<span class="number">0</span>]):  </span><br><span class="line">                    <span class="keyword">if</span> component == IDdegree_df.iloc[j,<span class="number">0</span>]:</span><br><span class="line">                        outdf.loc[flag] = [component, IDdegree_df.iloc[j,<span class="number">1</span>], <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>]</span><br><span class="line">                        flag = flag+<span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="comment">#下面这个循环是为了继续向我们的outdf添加列</span></span><br><span class="line">        <span class="comment">#顺序分别为：network_size, uid_num, mac_num</span></span><br><span class="line">        <span class="comment">#out_frame=&#123;&#x27;warnUser&#x27;:&#123;&#125;,&#x27;warnUdegree&#x27;:&#123;&#125;, </span></span><br><span class="line">        <span class="comment">#&#x27;network_size&#x27;:&#123;&#125;, &#x27;id_num&#x27;:&#123;&#125;, &#x27;mac_num&#x27;:&#123;&#125;&#125;</span></span><br><span class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(flag_before, flag):</span><br><span class="line">            outdf.loc[i,<span class="string">&#x27;network_size&#x27;</span>] = <span class="built_in">len</span>(largest_components)</span><br><span class="line">            outdf.loc[i,<span class="string">&#x27;id_num&#x27;</span>] = point_num</span><br><span class="line">            outdf.loc[i,<span class="string">&#x27;mac_num&#x27;</span>] = <span class="built_in">len</span>(largest_components) - point_num </span><br><span class="line"></span><br><span class="line">        <span class="comment">#上面我们输出了第一个最大子图的大小/包含的id/id的数量/mac的数量等值</span></span><br><span class="line">        <span class="comment">#然后我们需要把这个最大子图中所涉及的点在id_mac_weight中删掉：</span></span><br><span class="line">        <span class="keyword">if</span> <span class="built_in">len</span>(point_list)==<span class="number">1</span>:</span><br><span class="line">            IDmac_df=IDmac_df[~IDmac_df[<span class="string">&#x27;UID&#x27;</span>].isin([point_list[<span class="number">0</span>]])]</span><br><span class="line">            </span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">for</span> m <span class="keyword">in</span> <span class="built_in">range</span>(<span class="built_in">len</span>(point_list)):</span><br><span class="line">                IDmac_df=IDmac_df[~IDmac_df[<span class="string">&#x27;UID&#x27;</span>].isin([point_list[m]])]</span><br><span class="line">    </span><br><span class="line">        data_size = IDmac_df.shape[<span class="number">0</span>]</span><br><span class="line">        </span><br><span class="line">        print(<span class="string">&quot;IDmac_df_shape[0]_after:&quot;</span>)</span><br><span class="line">        print(IDmac_df.shape[<span class="number">0</span>])</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> outdf</span><br><span class="line">                    </span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    PATH = <span class="string">&#x27;./input.csv&#x27;</span></span><br><span class="line">    start_time = time.time() </span><br><span class="line">    outputframe = graph_analysis(PATH)</span><br><span class="line">    end_time = time.time() </span><br><span class="line">    print(<span class="string">&#x27;Took %f second&#x27;</span> % (end_time - start_time))</span><br><span class="line">    <span class="comment">#保留头部，不保留列索引</span></span><br><span class="line">    outputframe.to_csv(<span class="string">&quot;output.csv&quot;</span>, index=<span class="literal">False</span>, header=<span class="literal">True</span>) </span><br></pre></td></tr></table></figure>
+
+
+            </div>
+
+            <!-- Post Comments -->
+            
+    <!-- 使用 DISQUS_CLICK -->
+<div id="disqus-comment">
+    <div id="disqus_thread"></div>
+
+<!-- add animation -->
+<style>
+	.disqus_click_btn {
+            line-height: 30px;
+            margin: 0;
+            min-width: 50px;
+            padding: 0 14px;
+            display: inline-block;
+            font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+            font-size: 14px;
+            font-weight: 400;
+            text-transform: uppercase;
+            letter-spacing: 0;
+            overflow: hidden;
+            will-change: box-shadow;
+            transition: box-shadow .2s cubic-bezier(.4, 0, 1, 1), background-color .2s cubic-bezier(.4, 0, .2, 1), color .2s cubic-bezier(.4, 0, .2, 1);
+            outline: 0;
+            cursor: pointer;
+            text-decoration: none;
+            text-align: center;
+            vertical-align: middle;
+            border: 0;
+            background: rgba(158, 158, 158, .2);
+            box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+            color: #fff;
+            background-color: #7EC0EE;
+            text-shadow: 0
+        }
+</style>
+	
+<div class="btn_click_load" id="disqus_bt"> 
+    <button class="disqus_click_btn">点击查看评论</button>
+</div>
+
+<!--
+<script type="text/javascript">
+$('.btn_click_load').click(function() {
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'http-miccall-tech'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+
+    document.getElementById('disqus_bt').style.display = "none";
+});
+</script>
+-->
+<script type="text/javascript">
+    var disqus_config = function () {
+        this.page.url = 'http://towerdev.com/2021/03/19/Note2%E5%BE%AA%E7%8E%AF%E5%9B%BE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/';  // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://towerdev.com/2021/03/19/Note2%E5%BE%AA%E7%8E%AF%E5%9B%BE%E7%AE%97%E6%B3%95%E5%AE%9E%E7%8E%B0/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+</script>
+
+<script type="text/javascript">
+    $('.btn_click_load').click(function() {  //click to load comments
+        (function() { // DON'T EDIT BELOW THIS LINE
+            var d = document;
+            var s = d.createElement('script');
+            s.src = '//http-miccall-tech.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', + new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+        $('.btn_click_load').css('display','none');
+    });
+</script>
+</div>
+<style>
+    #disqus-comment{
+        background-color: #eee;
+        padding: 2pc;
+    }
+</style>
+
+
+        </div>
+        <!-- Copyright 版权 start -->
+                <div id="copyright">
+            <ul>
+                <li>&copy;Powered By <a target="_blank" rel="noopener" href="https://hexo.io/zh-cn/" style="border-bottom: none;">hexo</a></li>
+                <li>Design: <a target="_blank" rel="noopener" href="http://miccall.tech " style="border-bottom: none;">miccall</a></li>
+            </ul>
+            
+                <span id="busuanzi_container_site_pv">本站总访问量<span id="busuanzi_value_site_pv"></span>次</span>
+			
+        </div>
+    </div>
+</body>
+
+
+
+ 	
+</html>
